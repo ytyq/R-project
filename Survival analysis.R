@@ -193,30 +193,3 @@ remove(list=ls());cat("\14");
 library("survival")
 library("survminer")
 
-#survival curves 
-# Create time and event data
-example<- data.frame(
-time = c(5, 6, 2, 4, 4),
-event =c(1, 0, 0, 1, 1))
-
-# Compute Kaplan-Meier estimate
-km <- survfit(Surv(time,event) ~ 1, data=example)
-km
-
-# Take a look at the structure
-str(km)
-
-# Create data.frame
-data.frame(time = km$time, n.risk = km$n.risk, n.event = km$n.event,
-           n.censor = km$n.censor, surv = km$surv)
-
-
-#graph
-ggsurvplot(fit=km, 
-           palette = "blue",
-           linetye=1,
-           surv.median.line="hv",
-           risk.table=TRUE,
-           cumevents=TRUE,
-           cumcensor=TRUE,
-           tables.height=0.1)
